@@ -12,7 +12,7 @@ of a PR2 robot:
     ros_package_path('urdfprolog', X),
     atom_concat(X, '/urdf/pr2_for_unit_tests.urdf', FileURL),
     kb_create(urdf:'Robot', Robot),
-    rdf_urdf_load(Robot, FileURL).
+    rdf_urdf_load_file(Robot, FileURL).
   
   The result is a RDF description of the robot's links and joints.
   However, components are not considered in URDF.
