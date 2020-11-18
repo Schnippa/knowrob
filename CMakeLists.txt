@@ -7,7 +7,7 @@ set(SOMA_VERSION "1.0.0")
 include("cmake/ontologies.cmake")
 
 find_package(catkin REQUIRED COMPONENTS
-    rosprolog roscpp roslib urdf
+    rosprolog roscpp roslib urdf xacro
     geometry_msgs message_generation)
 
 catkin_python_setup()
@@ -105,12 +105,6 @@ add_dependencies(marker_plugin
 	${${PROJECT_NAME}_EXPORTED_TARGETS}
 	${catkin_EXPORTED_TARGETS})
 
-add_library(urdf_parser SHARED src/ros/urdf/parser.cpp)
-target_link_libraries(urdf_parser ${SWIPL_LIBRARIES} ${catkin_LIBRARIES})
-add_dependencies(urdf_parser
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS})
-
 ##############
 ##############
 
@@ -119,3 +113,18 @@ install(DIRECTORY owl/
 
 install(DIRECTORY prolog/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/prolog)
+
+
+#############
+#####    URDFPROLOG
+# build C++ library with predicates to parse URDF files
+
+catkin_add_plunit(rdf_urdf urdf_parser)
+
+include_directories(${SWIPL_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
+add_library(urdf_parser SHARED src/ros/urdfprolog/src/urdf_parser.cpp)
+target_link_libraries(urdf_parser ${SWIPL_LIBRARIES} ${catkin_LIBRARIES})
+
+
+
+
