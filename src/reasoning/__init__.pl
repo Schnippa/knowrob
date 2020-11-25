@@ -8,3 +8,4 @@
 :- use_directory('OWL').
 :- use_directory('SWRL').
 :- use_directory('SRDL').
+:- use_directory('semweb').
