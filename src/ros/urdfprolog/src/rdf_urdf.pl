@@ -49,10 +49,11 @@
 
 :- use_module(library('semweb/rdf_db')).
 :- use_module(library('semweb/rdfs')).
-% :- use_module(library('semweb/owl')).
 :- use_module(library('knowrob')). %:- use_module(library('knowrob/transforms')).
 
 :- use_module('urdf_parser').
+
+:- rdf_db:rdf_register_ns(ease_obj,  'http://www.ease-crc.org/ont/EASE-OBJ.owl#', [keep(true)]).
 
 :-  rdf_meta
     rdf_urdf_load_file(r,+),
